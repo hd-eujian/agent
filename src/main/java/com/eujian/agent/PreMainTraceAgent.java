@@ -6,10 +6,10 @@ public class PreMainTraceAgent {
     public static void agentmain (String agentArgs, Instrumentation inst) throws Exception {
         System.out.println("agent begin agentArgs="+agentArgs);
         MyClassFileTransformer myClassFileTransformer;
+
+        //如果入参是1就清除aop
         if("1".equals(agentArgs)){
             myClassFileTransformer = new MyClassFileTransformer(true);
-//            boolean b = inst.removeTransformer(new MyClassFileTransformer());
-//            System.out.println("remove b="+b);
             inst.addTransformer(myClassFileTransformer,true);
         }else {
             myClassFileTransformer = new MyClassFileTransformer();
